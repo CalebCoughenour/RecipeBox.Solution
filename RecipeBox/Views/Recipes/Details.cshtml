@@ -1,0 +1,21 @@
+@model RecipeBox.Models.Recipe
+
+<h2>Details</h2>
+
+<h3>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</h3>
+
+@if(@Model.RecipeIngredients.Count == 0)
+{
+  <p>no ingredients</p>
+}
+else
+{
+  <ul>
+  @foreach(var join in Model.RecipeIngredients)
+  {
+    <li>@join.Ingredient.Name</li>
+  }
+  </ul>
+}
+
+<p>@Html.ActionLink("Add Ingredient", "AddIngredients", new { id = Model.RecipeId})</p>

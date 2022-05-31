@@ -1,4 +1,15 @@
-<h1>splash page</h1>
+<h1>Recipe Box</h1>
+
+@using System.Security.Claims
 
 
-<p>@Html.ActionLink("Login", "Index", "Account")</p>
+@if (User.Identity.IsAuthenticated)
+{
+<h3>Welcome @User.Identity.Name.</h3>
+<p>Ready to discover new recipes?</p>
+}
+else
+{
+  <h3>Log in to view your recipes.</h3>
+  <p>@Html.ActionLink("Register/Log-in", "Index", "Account")</p>
+}

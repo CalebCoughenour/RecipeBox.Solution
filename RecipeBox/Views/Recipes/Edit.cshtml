@@ -1,0 +1,15 @@
+@model RecipeBox.Models.Recipe
+
+<h4>Edit recipe</h4>
+
+@using (Html.BeginForm())
+{
+  @Html.LabelFor(model =>model.Name)
+  @Html.EditorFor(model =>model.Name)
+
+  @Html.LabelFor(model =>model.Instruction)
+  @Html.TextAreaFor(model =>model.Instruction)
+
+  @Html.LabelFor(model =>model.CookTime)
+  @Html.EditorFor(model =>model.CookTime)
+}

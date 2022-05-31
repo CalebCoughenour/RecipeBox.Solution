@@ -1,0 +1,10 @@
+@model RecipeBox.Models.Recipe
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.RecipeId)
+
+  @Html.Label("Select ingredient")
+  @Html.DropDownList("IngredientId")
+  <input type="submit" value="Save" />
+}

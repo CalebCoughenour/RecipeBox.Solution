@@ -1,0 +1,9 @@
+@model RecipeBox.Models.Ingredient
+<h4>Create new ingredient</h4>
+
+@using (Html.BeginForm())
+{
+  @Html.LabelFor(model => model.Name)
+  @Html.EditorFor(model => model.Name)
+  <input type="submit" value="Create Ingredient">
+}

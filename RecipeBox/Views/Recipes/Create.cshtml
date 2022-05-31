@@ -1,0 +1,33 @@
+@model RecipeBox.Models.Recipe
+
+<h4>Add new Recipe</h4>
+
+@using (Html.BeginForm())
+{
+  @Html.LabelFor(model =>model.Name)
+  @Html.EditorFor(model =>model.Name)
+
+  @Html.LabelFor(model =>model.Instruction)
+  @Html.TextAreaFor(model =>model.Instruction)
+
+  @Html.LabelFor(model =>model.CookTime)
+  @Html.EditorFor(model =>model.CookTime)
+@*
+  <select multiple>
+    @foreach (var ingredient in ViewBag.IngredientId)
+    {
+      <option value=@ingredient.IngredientId>@ingredient.Name</option>
+    }
+
+  </select>
+*@
+
+@foreach (var ingredient in ViewBag.IngredientId)
+    {
+      <label for="@ingredient.IngredientId">@ingredient.Name</label>
+      <input type="checkbox" value="@ingredient.Name" name="@ingredient.IngredientId" id="@ingredient.IngredientId">
+    }
+
+
+  <input type="submit" value="Add new recipe">
+}

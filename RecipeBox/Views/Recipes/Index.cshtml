@@ -1,0 +1,22 @@
+@using RecipeBox.Models;
+@model IEnumerable<RecipeBox.Models.Recipe>
+
+<h1>All Recipes</h1>
+
+@if(Model.Any())
+{
+<ul>
+  @foreach(Recipe recipe in Model)
+  {
+    <li>@Html.ActionLink($"{recipe.Name}", "Details", new { id = recipe.RecipeId})</li>
+  }
+</ul>
+}
+else
+{
+  <p>Nothing added yet</p>
+}
+<div class="main-nav">
+  <p>@Html.ActionLink("My Recipes", "MyRecipes", "Recipes", null, new { @Class = "btn btn-primary"})</p>
+  <p>@Html.ActionLink("Add Recipe", "Create", "Recipes", null, new { @Class = "btn btn-primary"})</p>
+</div>
