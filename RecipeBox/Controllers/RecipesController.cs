@@ -124,6 +124,51 @@ namespace RecipeBox.Controllers
       return RedirectToAction("Index");
     }
 
+    public ActionResult AddCategory(int id)
+    {
+      var thisRecipe = _db.Recipes.FirstOrDefault(recipe => recipe.RecipeId == id);
+      ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Name");
+      return View(thisRecipe);
+    }
+
+    [HttpPost]
+    public ActionResult AddCategory(Recipe recipe, int CategoryId)
+    {
+      if (CategoryId != 0)
+      {
+        _db.CategoryRecipes.Add(new CategoryRecipe() { RecipeId = recipe.RecipeId, CategoryId = CategoryId });
+        _db.SaveChanges();
+      }
+      return RedirectToAction("Index");
+    }
+
+    public async Task<ActionResult> FavoriteRecipes(Recipe recipe)
+    {
+      var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      var currentUser = await _userManager.FindByIdAsync(userId);
+      var userRecipes = _db.UserRecipes.Where(entry => entry.User.Id == currentUser.Id).ToList();
+
+      return View(userRecipes);
+    }
+
+    public ActionResult AddFavorite(int id)
+    {
+      var thisRecipe = _db.Recipes.FirstOrDefault(recipe => recipe.RecipeId == id);
+      return View(thisRecipe);
+    }
+
+    [HttpPost]
+    public async Task<ActionResult> AddFavorite(Recipe recipe)
+    {
+      var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      var currentUser = await _userManager.FindByIdAsync(userId);
+      if(!_db.UserRecipes.Where(entry => entry.User.Id == currentUser.Id).Any(entry => entry.Recipe.RecipeId == recipe.RecipeId))
+      {
+      _db.UserRecipes.Add(new UserRecipe() { RecipeId = recipe.RecipeId, User = currentUser});
+      _db.SaveChanges();
+      }
+      return RedirectToAction("FavoriteRecipes");
+    }
   }
 
 
