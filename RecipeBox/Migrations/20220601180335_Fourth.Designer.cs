@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RecipeBox.Models;
 
 namespace RecipeBox.Migrations
 {
     [DbContext(typeof(RecipeBoxContext))]
-    partial class RecipeBoxContextModelSnapshot : ModelSnapshot
+    [Migration("20220601180335_Fourth")]
+    partial class Fourth
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -460,12 +462,17 @@ namespace RecipeBox.Migrations
                         .IsRequired();
 
                     b.HasOne("RecipeBox.Models.ApplicationUser", "User")
-                        .WithMany()
+                        .WithMany("UserRecipes")
                         .HasForeignKey("UserId");
 
                     b.Navigation("Recipe");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("RecipeBox.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("UserRecipes");
                 });
 
             modelBuilder.Entity("RecipeBox.Models.Category", b =>

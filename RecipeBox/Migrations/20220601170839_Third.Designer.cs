@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RecipeBox.Models;
 
 namespace RecipeBox.Migrations
 {
     [DbContext(typeof(RecipeBoxContext))]
-    partial class RecipeBoxContextModelSnapshot : ModelSnapshot
+    [Migration("20220601170839_Third")]
+    partial class Third
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -320,17 +322,17 @@ namespace RecipeBox.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
+
                     b.Property<int>("RecipeId")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
-
                     b.HasKey("UserRecipeId");
 
-                    b.HasIndex("RecipeId");
+                    b.HasIndex("ApplicationUserId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("RecipeId");
 
                     b.ToTable("UserRecipes");
                 });
@@ -453,19 +455,22 @@ namespace RecipeBox.Migrations
 
             modelBuilder.Entity("RecipeBox.Models.UserRecipe", b =>
                 {
-                    b.HasOne("RecipeBox.Models.Recipe", "Recipe")
+                    b.HasOne("RecipeBox.Models.ApplicationUser", null)
                         .WithMany("UserRecipes")
+                        .HasForeignKey("ApplicationUserId");
+
+                    b.HasOne("RecipeBox.Models.Recipe", "Recipe")
+                        .WithMany()
                         .HasForeignKey("RecipeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("RecipeBox.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
                     b.Navigation("Recipe");
+                });
 
-                    b.Navigation("User");
+            modelBuilder.Entity("RecipeBox.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("UserRecipes");
                 });
 
             modelBuilder.Entity("RecipeBox.Models.Category", b =>
@@ -483,8 +488,6 @@ namespace RecipeBox.Migrations
                     b.Navigation("CategoryRecipes");
 
                     b.Navigation("RecipeIngredients");
-
-                    b.Navigation("UserRecipes");
                 });
 #pragma warning restore 612, 618
         }
