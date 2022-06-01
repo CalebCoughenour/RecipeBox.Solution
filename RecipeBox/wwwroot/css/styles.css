@@ -1,3 +1,8 @@
 .main-nav {
   display: flex;
 }
+
+.btn-tiny {
+  transform: scale(.5) translate(-5px, -12px);
+
+}
