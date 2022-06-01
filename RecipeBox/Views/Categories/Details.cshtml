@@ -1,0 +1,19 @@
+@model RecipeBox.Models.Category;
+
+<h3>@Html.DisplayFor(model => model.Name)'s Details</h3>
+
+@if(@Model.CategoryRecipes.Count == 0)
+{
+  <p>No recipes in this category</p>
+
+}
+else
+{
+  <h4>Recipes in @Html.DisplayFor(model => model.Name)</h4>
+  <ul>
+    @foreach(var catrec in Model.CategoryRecipes)
+    {
+      <li>@Html.ActionLink("@catrec.Recipe.Name", "Details", "Recipes", new { id = @catrec.Recipe.RecipeId})</li>
+    }
+  </ul>
+}
