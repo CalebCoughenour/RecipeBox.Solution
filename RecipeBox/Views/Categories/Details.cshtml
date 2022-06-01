@@ -13,7 +13,7 @@ else
   <ul>
     @foreach(var catrec in Model.CategoryRecipes)
     {
-      <li>@Html.ActionLink("@catrec.Recipe.Name", "Details", "Recipes", new { id = @catrec.Recipe.RecipeId})</li>
+      <li>@Html.ActionLink(@catrec.Recipe.Name, "Details", "Recipes", new { id = @catrec.Recipe.RecipeId})</li>
     }
   </ul>
 }
