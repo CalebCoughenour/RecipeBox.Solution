@@ -142,7 +142,8 @@ namespace RecipeBox.Controllers
       return RedirectToAction("Index");
     }
 
-    public async Task<ActionResult> FavoriteRecipes(Recipe recipe)
+    [Authorize]
+    public async Task<ActionResult> FavoriteRecipes()
     {
       var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
       var currentUser = await _userManager.FindByIdAsync(userId);
@@ -168,6 +169,24 @@ namespace RecipeBox.Controllers
       _db.SaveChanges();
       }
       return RedirectToAction("FavoriteRecipes");
+    }
+
+    public async Task<ActionResult> EditFavorites()
+    {
+      var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      var currentUser = await _userManager.FindByIdAsync(userId);
+      var userRecipes = _db.UserRecipes.Where(entry => entry.User.Id == currentUser.Id).ToList();
+
+      return View(userRecipes);
+    }
+
+    [HttpPost]
+    public ActionResult DeleteFavorite(int joinId)
+    {
+      var joinEntry = _db.UserRecipes.FirstOrDefault(entry => entry.UserRecipeId == joinId);
+      _db.UserRecipes.Remove(joinEntry);
+      _db.SaveChanges();
+      return RedirectToAction("EditFavorites");
     }
   }
 
