@@ -28,7 +28,10 @@ else
   </ul>
 }
 
-<p>@Html.ActionLink("Add Ingredient", "AddIngredients", new { id = Model.RecipeId})</p>
-<p>@Html.ActionLink("Add Category", "AddCategory", new { id = Model.RecipeId})</p>
-<p>@Html.ActionLink("Delete Recipe", "Delete", new { id = Model.RecipeId })</p>
-<p>@Html.ActionLink("Add to favorites", "AddFavorite", new { id = Model.RecipeId})</p>
+<div class="sub-nav">
+  <p>@Html.ActionLink("Add Ingredient", "AddIngredients", new { id = Model.RecipeId})</p>
+  <p>@Html.ActionLink("Add Category", "AddCategory", new { id = Model.RecipeId})</p>
+  <p>@Html.ActionLink("Edit Recipe", "Edit", new { id = Model.RecipeId })</p>
+  <p>@Html.ActionLink("Delete Recipe", "Delete", new { id = Model.RecipeId })</p>
+  <p>@Html.ActionLink("Add to favorites", "AddFavorite", new { id = Model.RecipeId})</p>
+</div>

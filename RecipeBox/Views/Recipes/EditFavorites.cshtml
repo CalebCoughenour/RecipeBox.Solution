@@ -7,8 +7,14 @@
   <ul>
   @foreach(var join in Model)
   {
+    <div class="d-flex">
     <li>@Html.ActionLink(@join.Recipe.Name, "Details", new { id = @join.Recipe.RecipeId})</li>
-
+    @using (Html.BeginForm("DeleteFavorite", "Recipes"))
+    {
+      @Html.Hidden("joinId", @join.UserRecipeId)
+      <input type="submit" value="X" class="btn btn-danger btn-tiny"/>
+    }
+    </div>
   }
   </ul>
   
@@ -17,7 +23,3 @@ else
 {
 <p>no favorites yet.</p>
 }
-
-<div class="sub-nav">
-  <p>@Html.ActionLink("Edit Favorites", "EditFavorites")</p>
-</div>
