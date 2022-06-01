@@ -1,5 +1,42 @@
+body {
+  padding: 2rem;
+}
 .main-nav {
   display: flex;
+}
+.sub-nav {
+  display: flex;
+}
+
+.main-nav a {
+  color: white;
+  background-color:blue;
+  padding: 10px;
+  margin: 1px;
+  border-radius: 4px;
+}
+
+.main-nav a:hover {
+  color: white;
+  background-color:rgb(115, 115, 252);
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.sub-nav a {
+  color: white;
+  background-color:blue;
+  padding: 5px;
+  margin: 1px;
+  border-radius: 4px;
+  font-size: .80rem;
+}
+
+.sub-nav a:hover {
+  color: white;
+  background-color:rgb(115, 115, 252);
+  text-decoration: none;
+  transition: 0.3s;
 }
 
 .btn-tiny {
