@@ -1,0 +1,14 @@
+@model RecipeBox.Models.Ingredient
+
+<h3>@Html.DisplayFor(model => model.Name)</h3>
+
+@if(@Model.RecipeIngredients.Any())
+{
+  <ul>
+    @foreach(var recIng in Model.RecipeIngredients)
+    {
+      <li>@Html.ActionLink(@recIng.Recipe.Name, "Details", "Recipes", new { id = @recIng.Recipe.RecipeId})</li>
+
+    }
+  </ul>
+}

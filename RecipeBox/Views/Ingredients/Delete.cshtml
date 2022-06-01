@@ -1,0 +1,9 @@
+@model RecipeBox.Models.Ingredient
+
+<h2>Would you like to delete @Html.DisplayFor(model => model.Name)</h2>
+
+@using (Html.BeginForm())
+{
+  <input type="submit" value="Delete" />
+}
+<p>@Html.ActionLink("Back To Ingredients", "Index")</p>
