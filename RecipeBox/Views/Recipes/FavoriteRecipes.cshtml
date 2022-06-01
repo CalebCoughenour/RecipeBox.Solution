@@ -1,0 +1,18 @@
+@using RecipeBox.Models;
+@model IEnumerable<RecipeBox.Models.UserRecipe>
+
+@if(@Model.Any())
+{
+   <p>Favorite Recipes</p>
+  <ul>
+  @foreach(var join in Model)
+  {
+    <li>@join.Recipe.Name</li>
+  }
+  </ul>
+  
+}
+else
+{
+<p>no favorites yet.</p>
+}

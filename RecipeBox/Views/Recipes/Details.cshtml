@@ -3,6 +3,7 @@
 <h2>Details</h2>
 
 <h3>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</h3>
+<h5>@Html.DisplayNameFor(model => model.Instruction): @Html.DisplayFor(model => model.Instruction)</h5>
 
 @if(@Model.RecipeIngredients.Count == 0)
 {
@@ -10,13 +11,24 @@
 }
 else
 {
+  <p>Ingredients:</p>
   <ul>
   @foreach(var join in Model.RecipeIngredients)
   {
     <li>@join.Ingredient.Name</li>
   }
   </ul>
+
+  <p>Categories:</p>
+  <ul>
+    @foreach(var join in Model.CategoryRecipes)
+    {
+      <li>@join.Category.Name</li> 
+    }
+  </ul>
 }
 
 <p>@Html.ActionLink("Add Ingredient", "AddIngredients", new { id = Model.RecipeId})</p>
+<p>@Html.ActionLink("Add Category", "AddCategory", new { id = Model.RecipeId})</p>
 <p>@Html.ActionLink("Delete Recipe", "Delete", new { id = Model.RecipeId })</p>
+<p>@Html.ActionLink("Add to favorites", "AddFavorite", new { id = Model.RecipeId})</p>

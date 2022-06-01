@@ -1,0 +1,8 @@
+@model RecipeBox.Models.Recipe
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.RecipeId)
+  
+  <input type="submit" value="add to favorites" />
+}
