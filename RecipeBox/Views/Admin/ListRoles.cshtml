@@ -1,0 +1,35 @@
+@using RecipeBox.ViewModels
+@using Microsoft.AspNetCore.Identity;
+@model IEnumerable<IdentityRole>
+
+@{
+    ViewBag.Title = "All Roles";
+}
+
+<h1>All Roles</h1>
+
+@if(Model.Any())
+{
+  @Html.ActionLink("Create Role", "CreateRole")
+
+  foreach(var role in Model)
+  {
+    <div class="card mb-3">
+      <div class="card-header">
+        Role Id : @role.Id
+      </div>
+      <div class="card-body">
+      <h5 class="card-title">@role.Name</h5>
+      </div>
+      <div class="card-footer">
+        @Html.ActionLink("Edit", "CreateRole", "Admin", null, new { @Class = "btn btn-primary"})
+        @Html.ActionLink("Delete", "CreateRole", "Admin", null, new { @Class = "btn btn-danger"})
+      </div>
+    </div>
+  }
+}
+else
+{
+  <p>No rles create yet</p>
+  @Html.ActionLink("Create Role", "CreateRole")
+}

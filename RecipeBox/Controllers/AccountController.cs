@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using RecipeBox.Models;
 using System.Threading.Tasks;
 using RecipeBox.ViewModels;
+using System;
 
 namespace RecipeBox.Controllers
 {
@@ -35,12 +36,14 @@ namespace RecipeBox.Controllers
             var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
             
             IdentityResult result = await _userManager.CreateAsync(user, model.Password);
+        
             if (result.Succeeded)
             {
                 return RedirectToAction("Index");
             }
             else
             {
+
                 return View();
             }
         }

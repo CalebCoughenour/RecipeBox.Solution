@@ -1,0 +1,19 @@
+@using RecipeBox.ViewModels
+@model CreateRoleViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+<h1>Create Role</h1>
+<hr />
+
+    @using (Html.BeginForm())
+    {
+      @Html.LabelFor(model => model.RoleName)
+      @Html.EditorFor(model => model.RoleName)
+      <input type="submit" value="Create Role" class="btn btn-primary" />
+    } 
+    
+<div>
+    @Html.ActionLink("Go Back", "Index")
+</div>
